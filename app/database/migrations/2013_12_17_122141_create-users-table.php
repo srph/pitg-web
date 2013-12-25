@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration {
 	{
 		Schema::table('users', function($table) {
 			$table->string('username', 48);
+			$table->string('country');
 		});
 	}
 
