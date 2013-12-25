@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder {
 				'first_name'=>	'Admin',
 				'last_name' =>	'Admin',
 				'username'	=>	'srph',
-				'country'	=>	'Philippines'
+				'city_id'	=>	1
 			),
 
 			array(
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder {
 				'first_name'=>	'Admin',
 				'last_name' =>	'Admin',
 				'username'	=>	'giangiangian',
-				'country'	=>	'Philippines'
+				'city_id'	=>	2
 			),
 
 			array(
@@ -40,7 +40,7 @@ class UsersTableSeeder extends Seeder {
 				'first_name'=>	'Admin',
 				'last_name' =>	'Admin',
 				'username'	=>	'jcdoto',
-				'country'	=>	'Philippines'
+				'city_id'	=>	3
 			),
 
 			array(
@@ -51,7 +51,7 @@ class UsersTableSeeder extends Seeder {
 				'first_name'=>	'Admin',
 				'last_name' =>	'Admin',
 				'username'	=>	'rupaheizu',
-				'country'	=>	'Philippines'
+				'city_id'	=>	4
 			),
 		);
 
