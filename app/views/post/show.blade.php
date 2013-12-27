@@ -95,8 +95,10 @@
 				<p>{{ $errors->first('body')}} </p>
 			</div>
 		@endif
-		{{ Form::open(array('route' => array('post.{post_id}.reply.store', $post->id), 'method' => 'POST', 'id' => 'reply')) }}
-			<p> {{ Form::textarea('body', NULL, array('class' => 'form-control')) }} </p>
+		{{ Form::open(array('route' => array('reply.store'), 'method' => 'POST', 'id' => 'reply')) }}
+			{{ Form::token() }}
+			{{ Form::hidden('post_id', $post->id) }}
+			<p> {{ Form::textarea('body', Input::old('body'), array('class' => 'form-control')) }} </p>
 			<p> {{ Form::submit('Reply', array('class' => 'btn btn-primary'))}} </p>
 		{{ Form::close() }}
 	@endif
@@ -115,11 +117,11 @@
 			bootbox.confirm("Are you sure to delete this reply?", function(result) {
 				if(result) {
 					$.ajax({
-						url: " {{ url('reply') }}/" + $this.data('id'),
+						url: "{{ url('reply') }}/" + $this.data('id'),
 						type: 'DELETE',
 						success: function(data) {
 							if(data.status) {
-								location.reload();
+								window.location.reload();
 							}
 						},
 						dataType: 'json'
@@ -137,7 +139,7 @@
 			bootbox.confirm("Are you sure to delete this post?", function(result) {
 				if(result) {
 					$.ajax({
-						url: " {{ url('post') }}/" + $this.data('id'),
+						url: "{{ url('post') }}/" + $this.data('id'),
 						type: 'DELETE',
 						success: function(data) {
 							if(data.status) {
@@ -146,7 +148,6 @@
 						},
 						dataType: 'json'
 					});
-					console.log('yes');
 				}
 			});
 			return false;

@@ -9,7 +9,8 @@ class ReplyController extends BaseController {
 	 */
 	public function __construct()
 	{
-		$this->beforeFilter('csrf', array('except' => 'edit'));
+		$this->beforeFilter('auth');
+		$this->beforeFilter('csrf', array('only' => array('store', 'update')));
 	}
 
 	/**
@@ -17,12 +18,12 @@ class ReplyController extends BaseController {
 	 *
 	 * @return 	Response
 	 */
-	public function store($post_id)
+	public function store()
 	{
 		// Store the submitted reply to the database
 		$reply = new Reply;
 		$reply->user_id = Sentry::getUser()->id;
-		$reply->post_id = $post_id;
+		$reply->post_id = Input::get('post_id');
 		$reply->body = Input::get('body');
 		$reply->created_at = new DateTime;
 		$reply->updated_at = new DateTime;
@@ -30,11 +31,12 @@ class ReplyController extends BaseController {
 		// If the reply was stored succesfully
 		if($reply->save()) {
 			Session::flash('success', 'You have submitted your reply successfully!');
-			return Redirect::to(URL::route('post.show', $post_id) . '#' . $reply->id );
+			return Redirect::to(URL::route('post.show', $reply->post_id) . '#' . $reply->id );
 		}
 
 		// Otherwise, redirect to the form and show errors
-		return Redirect::to(URL::route('post.show', $post_id) . '#reply')
+		return Redirect::to(URL::route('post.show', $reply->post_id) . '#reply')
+			->withInput()
 			->withErrors($reply->errors());
 	}
 
@@ -44,7 +46,7 @@ class ReplyController extends BaseController {
 	 * @param 	int 	$id
 	 * @return 	Response
 	 */
-	public function edit($post_id, $id)
+	public function edit($id)
 	{
 		return View::make('post.reply.edit')
 			->with(array(
@@ -59,7 +61,7 @@ class ReplyController extends BaseController {
 	 * @param 	int 	$id
 	 * @return 	Response
 	 */
-	public function update($post_id, $id)
+	public function update($id)
 	{
 		$reply = Reply::find($id);
 
@@ -86,7 +88,7 @@ class ReplyController extends BaseController {
 	 * @param 	int 	$id
 	 * @return 	Response
 	 */
-	public function destroy($post_id, $id)
+	public function destroy($id)
 	{
 		$reply = Reply::find($id);
 
@@ -97,7 +99,7 @@ class ReplyController extends BaseController {
 		// If the reply was deleted succesfully from the database
 		// Flash a success message then return the user to its respective post
 		if($reply->delete()) {
-			Session::flash('success', 'You have successfully deleted your reply');
+			Session::flash('success', 'You have successfully deleted the reply');
 			return Response::json(array('status' => true));
 		}
 

@@ -27,7 +27,7 @@ Route::get('register', array('as' => 'register', 'uses' => 'RegistrationControll
 Route::post('register', array('uses' => 'RegistrationController@postRegister'));
 
 Route::resource('post', 'PostController');
-Route::resource('post/{post_id}/reply', 'ReplyController');
+Route::resource('reply', 'ReplyController');
 
 // Account Settings
 Route::get('settings/account', array('as' => 'account_settings', 'uses' => 'AccountController@getAccount'));
