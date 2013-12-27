@@ -11,11 +11,8 @@
 |
 */
 
-Route::get('/', array('as' => 'home', function()
-{
-	$user = User::find(1);
-	var_dump($user->posts()->orderBy('created_at', 'desc')->take(5)->get());
-}));
+Route::get('/', array('as' => 'home', 'uses' => 'HomeController@getIndex'));
+Route::get('about', array('as' => 'about', 'uses' => 'HomeController@getAbout'));
 
 // Login & Logout
 Route::get('login', array('as' => 'login', 'uses' => 'LoginController@getLogin'));

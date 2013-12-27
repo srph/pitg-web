@@ -15,7 +15,7 @@
 			
 			<ul class="nav navbar-nav">
 				<li> <a href="{{ URL::route('home') }}"> Home </a> </li>
-				<li> <a href="#"> About </a> </li>
+				<li> <a href="{{ URL::route('about') }}"> About </a> </li>
 				<li> <a href="{{ URL::route('post.index') }}"> Posts </a> </li>
 				<li> <a href="http://hakz.co"> IRC </a> </li>
 			</ul>	
