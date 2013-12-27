@@ -29,12 +29,18 @@
 				</div>
 				
 				<div class="panel-footer">
-					<a href="#{{ $post->user->id }}"> <span class="glyphicon glyphicon-link"></span> </a>
+					<a href="#{{ $post->user->id }}">
+						<span class="glyphicon glyphicon-link"></span>
+					</a>
+
 					@if(Sentry::check() && $post->user->id == Sentry::getUser()->id)
-							<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
-							<a class="delete-post" href="#" data-id="{{ $post->id }}">
-								<span class="glyphicon glyphicon-trash"></span>
-							</a>
+						<a class="edit-post" href="#">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</a>
+
+						<a class="delete-post" href="#">
+							<span class="glyphicon glyphicon-trash"></span>
+						</a>
 					@endif
 					<a href="{{ URL::route('profile', $post->user->id) }}">{{{ $post->user->username }}}</a> posted this {{ $post->carbonDate($post->created_at) }}
 				</div>
@@ -61,7 +67,10 @@
 					</div>
 
 					<div class="panel-footer">
-						<a href="#{{ $reply->id }}"> <span class="glyphicon glyphicon-link"></span> </a>
+						<a href="#{{ $reply->id }}">
+							<span class="glyphicon glyphicon-link"></span>
+						</a>
+
 						@if(Sentry::check() && $reply->user->id == Sentry::getUser()->id)
 							<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
 							<a class="delete-reply" href="#" data-id="{{ $reply->id }}">
@@ -139,11 +148,11 @@
 			bootbox.confirm("Are you sure to delete this post?", function(result) {
 				if(result) {
 					$.ajax({
-						url: "{{ url('post') }}/" + $this.data('id'),
+						url: "{{ URL::route('post.show', $post->id) }}",
 						type: 'DELETE',
 						success: function(data) {
 							if(data.status) {
-								window.location.replace("{{ url('post') }}");
+								window.location.replace("{{ URL::route('post.index') }}");
 							}
 						},
 						dataType: 'json'
@@ -151,6 +160,10 @@
 				}
 			});
 			return false;
+		});
+
+		$('edit-post').on('click', function() {
+			//
 		});
 	</script>
 
