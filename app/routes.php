@@ -17,7 +17,7 @@ Route::get('about', array('as' => 'about', 'uses' => 'HomeController@getAbout'))
 // Login & Logout
 Route::get('login', array('as' => 'login', 'uses' => 'LoginController@getLogin'));
 Route::post('login', array('uses' => 'LoginController@postLogin'));
-Route::get('logout', array('as' => 'logout', 'uses' => 'LoginController@logout'));
+Route::get('logout', array('as' => 'logout', 'uses' => 'LoginController@getLogout'));
 
 // Registration
 Route::get('register', array('as' => 'register', 'uses' => 'RegistrationController@getRegister'));

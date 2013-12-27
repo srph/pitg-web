@@ -64,8 +64,9 @@ class LoginController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	public function logout()
+	public function getLogout()
 	{
+		if(Sentry::check()) Session::flash('success', 'You have succesfully logged out from your account.');
 		Sentry::logout();
 		return Redirect::route('home');
 	}

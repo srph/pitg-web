@@ -51,6 +51,12 @@
 
 	<div class="container">
 		@yield('content')
+
+		<hr >
+
+		<div class="footer">
+			<p> Copyright 2013. All rights reserved. </p>
+		</div>
 	</div>
 
 	@yield('modal')
