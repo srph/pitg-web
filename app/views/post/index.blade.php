@@ -40,7 +40,7 @@
 					@foreach($posts as $post)
 						<tr>
 							<td><span class="glyphicon glyphicon-question-sign"></span></td> {{-- Post Type Icon --}}
-							<td><a href="{{ URL::route('post.show', $post->id) }}">{{{ $post->title }}}</a></td>
+							<td><a href="{{ URL::route('post.show', $post->permalink) }}">{{{ $post->title }}}</a></td>
 							<td><a href="{{ URL::route('profile', $post->user->id) }}">{{{ $post->user->username }}}</a></td>
 							<td>
 								@if(count($post->replies) >= 1)

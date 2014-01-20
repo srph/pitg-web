@@ -14,13 +14,13 @@ class Post extends Ardent {
 	/**
 	 * Ardent validation rules
 	 */
-	public static $rules = array(
-		'post_type_id'	=>	'exists:post_types,id',
-		'category_id'	=>	'exist:categories,id',
-		'title'		=>	'required|between:6,48|alpha_dash',
-		'body'		=>	'required|between:12|12000',
-		'tags'		=>	'alpha_dash'
-	);
+	// public static $rules = array(
+	// 	'post_type_id'	=>	'exists:post_types,id',
+	// 	'category_id'	=>	'exist:categories,id',
+	// 	'title'		=>	'required|between:6,48|alpha_dash',
+	// 	'body'		=>	'required|between:12,12000',
+	// 	'tags'		=>	'alpha_dash'
+	// );
 
 	/**
 	 * The database table used by the model
