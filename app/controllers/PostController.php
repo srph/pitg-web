@@ -52,16 +52,12 @@ class PostController extends BaseController {
 		$post->post_type_id = Input::get('post_type_id');
 		$post->category_id = Input::get('category');
 		$post->body = Input::get('body');
-		//create permalink
-		$link = $this->toAscii(Input::get('title'));
-		//this needs improvement, rand() should be replaced with the id
-		Post::where('permalink', $link)->exists() ? $permalink = $link.'-'.rand() : $permalink = $link;
-		$post->permalink = $permalink;
 
 		// If the post was stored succesfully
 		if($post->save()) {
+			$post->createPermalink();
 			// Session::flash('success', 'Your post has been successfully created');
-			return Redirect::route('post.show', $post->id);	// Return user to the home page
+			return Redirect::route('post.show', $post->permalink);	// Return user to the home page
 		}
 
 		// Otherwise, return him to the create post page with errors
@@ -161,26 +157,5 @@ class PostController extends BaseController {
 		// Otherwise, return him back to the post, and flash an error
 		Session::flash('error', 'An error has occured while deleting the post');
 		return Response::json(array('status' => false));
-	}
-
-	/**
-	* Generates permalink
-	*
-	* @param string $str
-	* @return string
-	**/
-
-	function toAscii($str, $replace=array(), $delimiter='-')
-	{
-		if( !empty($replace) ) {
-			$str = str_replace((array)$replace, ' ', $str);
-		}
-
-		$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
-		$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
-		$clean = strtolower(trim($clean, '-'));
-		$clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
-
-		return $clean;
 	}
 }

@@ -74,4 +74,23 @@ class Post extends Ardent {
 	{
 		return $this->hasMany('Reply');
 	}
+
+
+	/**
+	* Generates permalink
+	*
+	* @param string $str
+	* @return string
+	**/
+
+	function createPermalink()
+	{
+		$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $this->title);
+		$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
+		$clean = strtolower(trim($clean, '-'));
+		$clean = preg_replace("/[\/_|+ -]+/", '-', $clean);
+
+		$this->permalink = $clean;
+		$this->save();
+	}
 }
