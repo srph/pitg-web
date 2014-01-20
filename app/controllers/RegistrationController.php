@@ -35,9 +35,7 @@ class RegistrationController extends BaseController {
 				'username'		=>	Input::get('username'),
 				'password'		=>	Input::get('password'),
 				'first_name'	=>	Input::get('first_name'),
-				'last_name'		=>	Input::get('last_name'),
-				'created_at'	=>	new DateTime,
-				'updated_at'	=>	new Datetime
+				'last_name'		=>	Input::get('last_name')
 			));
 
 			if($registered) {

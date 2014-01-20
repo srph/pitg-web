@@ -52,8 +52,6 @@ class PostController extends BaseController {
 		$post->post_type_id = Input::get('post_type_id');
 		$post->category_id = Input::get('category');
 		$post->body = Input::get('body');
-		$post->created_at = new DateTime;
-		$post->updated_at = new DateTime;
 		//create permalink
 		$link = $this->toAscii(Input::get('title'));
 		//this needs improvement, rand() should be replaced with the id
@@ -124,7 +122,6 @@ class PostController extends BaseController {
 		$post->post_type_id = Input::get('post_type_id');
 		$post->category_id = Input::get('category_id');
 		$post->body = Input::get('body');
-		$post->updated_at = new DateTime;
 
 		// If the specified resource was updated succesfully
 		// Flash a success message and redirect him to the post
